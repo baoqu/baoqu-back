@@ -7,14 +7,40 @@
 
 :coreBase: {baseDir}/src/baoqu/
 
+"Baoqu is a tool for groups with a shared interest to help them take
+decisions by finding the things that they agree upon."
+-- Baoqu
+
 == Dependencies
 
 Baoqu back-end dependencies are:
 [source, clojure]
 ----
-
 include::{baseDir}/project.clj[tags=dependencies]
 ----
 
-== Structure
+=== Catacumba
 
+Catacumba is the toolkit chosen to handle front-end requests (both
+HTTP and WS)
+
+https://github.com/funcool/catacumba
+
+=== Yesql
+
+Yesql is the library chose to handle database persistence. It embraces
+separation of SQL from application code.
+
+https://github.com/krisajenkins/yesql
+
+== Run app
+
+To run the app in development mode, just execute:
+
+[source, clojure]
+----
+lein run
+----
+
+...and open http://localhost:5050/api/meta to check the application has
+started properly
