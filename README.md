@@ -1,6 +1,6 @@
 # baoqu
 
-FIXME
+Baoqu is a decision making tool.
 
 ## Prerequisites
 
