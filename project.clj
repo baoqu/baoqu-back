@@ -4,7 +4,10 @@
   :dependencies [[org.clojure/clojure "1.6.0"]
                  [compojure "1.1.6"]
                  [hiccup "1.0.5"]
-                 [ring-server "0.3.1"]]
+                 [ring-server "0.3.1"]
+                 [liberator "0.10.0"]
+                 [cheshire "5.2.0"]
+                 [yesql "0.5.1"]]
   :plugins [[lein-ring "0.8.12"]]
   :ring {:handler baoqu.handler/app
          :init baoqu.handler/init

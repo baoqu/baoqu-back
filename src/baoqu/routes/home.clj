@@ -1,9 +1,13 @@
 (ns baoqu.routes.home
   (:require [compojure.core :refer :all]
-            [baoqu.views.layout :as layout]))
+            [liberator.core :refer [defresource resource request-method-in]]
+            [cheshire.core :refer :all]
+            [baoqu.utils.mime :as mime]
+            [baoqu.services.meta :as meta]))
 
-(defn home []
-  (layout/common [:h1 "Hello World!"]))
+(defresource home
+  :handle-ok (generate-string meta/app-info)
+  :available-media-types [mime/application-json])
 
 (defroutes home-routes
-  (GET "/" [] (home)))
+  (GET "/" request home))
