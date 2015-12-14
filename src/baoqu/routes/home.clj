@@ -1,5 +1,5 @@
 (ns baoqu.routes.home
-  (:require [cheshire.core :refer :all]
+  (:require [cheshire.core :as json]
             [catacumba.http :as http]
             [baoqu.utils.mime :as mime]
             [baoqu.services.meta :as meta]))
@@ -8,5 +8,5 @@
   "Shows App information"
   [context]
   (http/ok
-   (generate-string meta/app-info)
+   (json/generate-string meta/app-info)
    {:content-type mime/application-json}))
