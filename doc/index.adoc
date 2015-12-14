@@ -1,0 +1,13 @@
+= Baoqu
+:revnumber: {project-version}
+:numbered:
+:imagesDir: images/
+:baseDir: ../
+:stem:
+
+:coreBase: {baseDir}/src/baoqu/
+
+[source, clojure]
+----
+include::{coreBase}/repl.clj[]
+----

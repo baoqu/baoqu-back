@@ -8,10 +8,15 @@
                  [liberator "0.10.0"]
                  [cheshire "5.2.0"]
                  [yesql "0.5.1"]]
-  :plugins [[lein-ring "0.8.12"]]
+  :plugins [[lein-ring "0.8.12"]
+            [lein-asciidoctor "0.1.14"]]
   :ring {:handler baoqu.handler/app
          :init baoqu.handler/init
          :destroy baoqu.handler/destroy}
+  :asciidoctor {:sources "doc/*.adoc"
+                :to-dir "target/asciidoctor/"
+                :source-highlight true
+                :toc :left}
   :profiles
   {:uberjar {:aot :all}
    :production
