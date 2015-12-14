@@ -1,13 +1,12 @@
 (ns baoqu.routes.home
-  (:require [compojure.core :refer :all]
-            [liberator.core :refer [defresource resource request-method-in]]
-            [cheshire.core :refer :all]
+  (:require [cheshire.core :refer :all]
+            [catacumba.http :as http]
             [baoqu.utils.mime :as mime]
             [baoqu.services.meta :as meta]))
 
-(defresource home
-  :handle-ok (generate-string meta/app-info)
-  :available-media-types [mime/application-json])
-
-(defroutes home-routes
-  (GET "/" request home))
+(defn hello-baoqu
+  "Shows App information"
+  [context]
+  (http/ok
+   (generate-string meta/app-info)
+   {:content-type mime/application-json}))

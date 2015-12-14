@@ -7,7 +7,14 @@
 
 :coreBase: {baseDir}/src/baoqu/
 
+== Dependencies
+
+Baoqu back-end dependencies are:
 [source, clojure]
 ----
-include::{coreBase}/repl.clj[]
+
+include::{baseDir}/project.clj[tags=dependencies]
 ----
+
+== Structure
+
