@@ -1,5 +1,5 @@
 (ns baoqu.routes.users
-  (:require [cheshire.core :as json]
+  (:require [baoqu.utils.mime :as mime]
             [baoqu.services.users :as service]))
 
 (defn create
@@ -10,4 +10,4 @@
         age (:age json)
         saved (service/create {:name name
                                :age age})]
-    (json/generate-string saved)))
+    (mime/to-json saved)))

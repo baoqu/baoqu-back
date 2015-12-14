@@ -1,5 +1,5 @@
 (ns baoqu.routes.events
-  (:require [cheshire.core :as json]
+  (:require [baoqu.utils.mime :as mime]
             [baoqu.services.events :as service]))
 
 (defn create
@@ -9,5 +9,5 @@
         name (:name json)
         user-id (:user-id json)
         saved (service/create {:name name
-                          :user-id user-id})]
-    (json/generate-string saved)))
+                               :user-id user-id})]
+    (mime/to-json saved)))

@@ -1,8 +1,8 @@
 (ns baoqu.app
   (:require [catacumba.core :as cat]
             [catacumba.handlers.misc :as misc]
-            [baoqu.routes.home :as home]
             [catacumba.handlers.parse :as parse]
+            [baoqu.routes.home :as home]
             [baoqu.routes.users :as users]
             [baoqu.routes.events :as events])
   (:gen-class))
