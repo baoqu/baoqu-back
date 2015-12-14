@@ -5,7 +5,7 @@
             [baoqu.services.meta :as meta]))
 
 (defn hello-baoqu
-  "Shows App information"
+  "shows App information"
   [context]
   (http/ok
    (json/generate-string meta/app-info)

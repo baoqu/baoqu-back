@@ -1,6 +1,7 @@
-(ns baoqu.services.users)
+(ns baoqu.services.users
+  (:require [baoqu.db.users :as db]))
 
-(defn create-user
+(defn create
   "Creates a new user with the name passed as parameter"
-  [name]
-  "")
+  [record]
+  (db/create record))

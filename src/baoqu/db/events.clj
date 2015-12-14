@@ -1,4 +1,4 @@
-(ns baoqu.persis.events)
+(ns baoqu.db.events)
 
 (defn create
   "Create a new entry in events table"

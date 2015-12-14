@@ -1,4 +1,4 @@
-(ns baoqu.persis.users)
+(ns baoqu.db.users)
 
 (defn create
   "Inserts a new record in the database"
