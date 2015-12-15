@@ -17,7 +17,8 @@
                 [:prefix "users"
                  [:post "create" #'users/create]]
                 [:prefix "events"
-                 [:post "create" #'events/create]]]]))
+                 [:post "create" #'events/create]
+                 [:post ":id/users" #'events/join]]]]))
 
 (defn -main
   [& args]
