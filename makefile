@@ -1,6 +1,6 @@
 all: docker-clean docker-run
 
-docker: docker-clean docker-build docker-run docker-att
+docker: docker-clean docker-build docker-run
 
 docker-clean:
 	docker rm -f baoqu-back || echo "No baoqu-back image found"
