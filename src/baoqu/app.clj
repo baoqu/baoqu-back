@@ -4,7 +4,8 @@
             [catacumba.handlers.parse :as parse]
             [baoqu.routes.home :as home]
             [baoqu.routes.users :as users]
-            [baoqu.routes.events :as events])
+            [baoqu.routes.events :as events]
+            [baoqu.init.fixtures :as fix])
   (:gen-class))
 
 (def app
@@ -20,4 +21,5 @@
 
 (defn -main
   [& args]
-  (cat/run-server app))
+  (cat/run-server app)
+  (fix/load-all))

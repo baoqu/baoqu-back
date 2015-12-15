@@ -6,8 +6,6 @@
   "Creates a new user"
   [ctx]
   (let [json (:data ctx)
-        name (:name json)
-        age (:age json)
-        saved (service/create {:name name
-                               :age age})]
+        username (:username json)
+        saved (service/create {:username username})]
     (mime/to-json saved)))
