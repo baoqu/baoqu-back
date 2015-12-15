@@ -5,7 +5,8 @@
 :baseDir: ../
 :stem:
 
-:coreBase: {baseDir}/src/baoqu/
+:coreBase: {baseDir}/src/
+:testBase: {baseDir}/test/
 
 "Baoqu is a tool for groups with a shared interest to help them take
 decisions by finding the things that they agree upon."
@@ -44,3 +45,12 @@ lein run
 
 ...and open http://localhost:5050/api/meta to check the application has
 started properly
+
+== Testing
+
+We are using `clojure.test`
+
+[source, clojure]
+----
+include::{testBase}/baoqu/test/services/events.clj[tags=mocking-sample]
+----
