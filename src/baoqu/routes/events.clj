@@ -1,6 +1,7 @@
 (ns baoqu.routes.events
   (:require [baoqu.utils.mime :as mime]
-            [baoqu.services.events :as service]))
+            [baoqu.services.events :as service]
+            [clojure.core.async :as async :refer [go-loop <! >! close!]]))
 
 (defn create
   "Creates a new event"
@@ -8,8 +9,7 @@
   (let [json (:data ctx)
         name (:name json)
         user_id (:user_id json)
-        saved (service/create {:name name
-                               :user_id user_id})]
+        saved (service/create name user_id)]
     (mime/to-json saved)))
 
 (defn join
@@ -20,3 +20,14 @@
         user_id (:user_id json)]
     (mime/to-json
      (service/join id user_id))))
+
+(defn status
+  "Serves current event status"
+  {:handler-type :catacumba/websocket}
+  [{:keys [in out]}]
+  (go-loop []
+    (if-let [received (<! in)]
+      (do
+        (>! out received)
+        (recur))
+      (close! out))))

@@ -1,7 +1,7 @@
 (ns baoqu.db.events
   (:require
    [baoqu.db.connection :refer [connection]]
-   [yesql.core :refer [defqueries]]))
+   [yesql.core :refer [defqueries require-sql]]))
 
 (defqueries "baoqu/db/events.sql"
   {:connection connection})
@@ -20,3 +20,8 @@
   "Gets all events"
   []
   (q-find-all))
+
+(defn join
+  "Inserts a new entry to user_events table"
+  [id user_id]
+  (q-join-event! {:event id :user user_id}))
