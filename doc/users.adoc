@@ -1,0 +1,41 @@
+== Users
+
+=== List users
+
+`GET /api/users`
+
+List all users
+
+=== Create user
+
+`POST /api/users`
+
+.Body
+[source,json]
+----
+{"username": "username.lala@domain.com"}
+----
+
+== Events
+
+=== List events
+
+List all events
+
+`GET /api/events`
+
+=== User joins event
+
+Joins a given user to a specific event
+
+`POST /api/events/{id}/users`
+
+* {id}: Event id
+
+.Body
+[source, json]
+----
+{"user_id": "22"}
+----
+
+
