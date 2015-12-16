@@ -20,3 +20,7 @@
   "Counts all users in a specific event"
   [event_id]
   (db/count-users-by-event event_id))
+
+(defn list-all
+  []
+  (db/find-all))

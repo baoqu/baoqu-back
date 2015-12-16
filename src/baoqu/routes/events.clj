@@ -23,6 +23,11 @@
     (mime/to-json
      (service/join id user_id))))
 
+(defn list
+  "Lists all events"
+  [ctx]
+  (mime/to-json (service/list-all)))
+
 (defn status
   "Serves current event status"
   {:handler-type :catacumba/websocket}

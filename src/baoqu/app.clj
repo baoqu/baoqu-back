@@ -35,6 +35,7 @@
                  [:get #'users/list]
                  [:post "create" #'users/create]]
                 [:prefix "events"
+                 [:get #'events/list]
                  [:post "create" #'events/create]
                  [:post ":id/users" #'events/join]]]
                ;; WEB SOCKETS

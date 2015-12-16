@@ -34,3 +34,13 @@
     (ev/join-all-users-to event)
     ;; The event should have users
     (is (> (ev/count-users-by-event event) 0))))
+
+(deftest list-all
+  (testing "when listing all events")
+  (fix/create-drop)
+  (let [sample sample-event
+        user (:user sample)
+        name (:name sample)
+        result (ev/create name user)
+        event-count (count (ev/list-all))]
+    (is (= event-count 1))))
