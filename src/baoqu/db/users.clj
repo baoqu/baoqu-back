@@ -40,3 +40,8 @@
   "Returns all users"
   []
   (q-find-all))
+
+(defn find-by-username
+  "Gets a given user by his/her username"
+  [username]
+  (q-find-by-username {:username username} just-first-row))

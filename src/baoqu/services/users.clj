@@ -10,3 +10,8 @@
   "Lists all users"
   []
   (db/find-all))
+
+(defn find-by-username
+  "Finds a given user data by his/her username"
+  [username]
+  (db/find-by-username username))

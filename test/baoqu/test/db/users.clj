@@ -19,3 +19,10 @@
     (users/create {:username "ah"})
     (users/create {:username "oh"})
     (is (= (count (users/find-all)) 2))))
+
+(deftest find-by-username
+  (testing "when getting a user by its username"
+    (fix/create-drop)
+    (users/create {:username "pete"})
+    (users/create {:username "paul"})
+    (is (fn/not-nil? (users/find-by-username "pete")))))

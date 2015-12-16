@@ -1,6 +1,7 @@
 (ns baoqu.routes.events
   (:require [baoqu.utils.mime :as mime]
             [baoqu.services.events :as service]
+            [baoqu.services.users :as users]
             [clojure.core.async :as async :refer [go-loop <! >! close!]]))
 
 (defn create
@@ -15,9 +16,10 @@
 (defn join
   "Adds a given user to the current event"
   [ctx]
-  (let [id (get-in ctx [:route-params :id])
-        json (:data ctx)
-        user_id (:user_id json)]
+  ;;  (let [id (get-in ctx [:route-params :id])
+  (let [json (:data ctx)
+        id (:id (first (service/list-all)))
+        user_id (:id (users/find-by-username (:username json)))]
     (mime/to-json
      (service/join id user_id))))
 

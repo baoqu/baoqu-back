@@ -13,6 +13,9 @@ SELECT * FROM users;
 -- name: q-find-by-id
 SELECT * FROM users where id = :id
 
+-- name: q-find-by-username
+SELECT * FROM users where username = :username;
+
 -- name: q-create-users-events-table!
 CREATE TABLE users_events (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
