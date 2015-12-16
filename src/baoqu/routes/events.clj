@@ -2,7 +2,8 @@
   (:require [baoqu.utils.mime :as mime]
             [baoqu.services.events :as service]
             [baoqu.services.users :as users]
-            [clojure.core.async :as async :refer [go-loop <! >! close!]]))
+            [clojure.core.async :as async :refer [go-loop <! >! close!]]
+            [baoqu.utils.mime :as utils]))
 
 (defn create
   "Creates a new event"
