@@ -2,11 +2,21 @@
 
 === List users
 
-`GET /api/users`
-
 List all users
 
+==== Request
+
+`GET /api/users`
+
+==== Response
+
+#TODO
+
 === Create user
+
+Creates a new user
+
+==== Request
 
 `POST /api/users`
 
@@ -16,15 +26,29 @@ List all users
 {"username": "username.lala@domain.com"}
 ----
 
+==== Response
+
+#TODO
+
 == Events
 
 === List events
+
+Lists all available events
+
+==== Request
 
 List all events
 
 `GET /api/events`
 
+==== Response
+
+#TODO
+
 === User joins event
+
+==== Request
 
 Joins a given user to a specific event
 
@@ -38,4 +62,7 @@ Joins a given user to a specific event
 {"user_id": "22"}
 ----
 
+==== Response
+
+#TODO
 
