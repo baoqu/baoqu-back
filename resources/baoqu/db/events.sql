@@ -1,4 +1,4 @@
--- name: q-create-table!
+-- name: q-create-events-table!
 CREATE TABLE events (
        id INTEGER PRIMARY KEY AUTOINCREMENT,
        `name` varchar(255),
@@ -6,6 +6,9 @@ CREATE TABLE events (
        approval_factor int,
        created_by int
 );
+
+-- name: q-drop-events-table!
+DROP TABLE events;
 
 -- name: q-create<!
 INSERT INTO events (`name`, created_by) VALUES (:name, :user);

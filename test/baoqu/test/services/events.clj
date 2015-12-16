@@ -1,17 +1,26 @@
 (ns baoqu.test.services.events
   (:use [clojure.test])
-  (:require [baoqu.services.events :as ev]))
+  (:require [baoqu.services.events :as ev]
+            [baoqu.db.events :as db-events]
+            [baoqu.db.users :as db-users]
+            [baoqu.utils.functions :as fn]))
 
 (def sample-event {:name "new event" :user-id 22 })
 
-;; tag::mocking-sample[]
+(defn drop-create
+  []
+  (fn/try-execute db-users/drop-users-events-table)
+  (fn/try-execute db-users/drop-table)
+  (fn/try-execute db-events/drop-table)
+  (fn/try-execute db-users/create-table)
+  (fn/try-execute db-events/create-table)
+  (fn/try-execute db-users/create-users-events-table))
+
 (deftest create
   (testing "it should return the same structure"
-    ;; Mocking persistence to return the same structure
-    (with-redefs-fn {#'baoqu.db.events/create (fn [event] event)}
-      #(let [sample sample-event
-             user (:user sample)
-             name (:name sample)
-             result (ev/create name user)]
-        (is (= (:name result) "new event"))))))
-;; end::mocking-sample[]
+    (drop-create)
+    (let [sample sample-event
+          user (:user sample)
+          name (:name sample)
+          result (ev/create name user)]
+      (is (= (:name result) "new event")))))

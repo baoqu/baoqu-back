@@ -9,7 +9,12 @@
 (defn create-table
   "creates the event type table"
   []
-  (q-create-table!))
+  (q-create-events-table!))
+
+(defn drop-table
+  "Drops table"
+  []
+  (q-drop-events-table!))
 
 (defn create
   "Create a new event and returns saved record"
