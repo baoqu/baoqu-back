@@ -1,6 +1,6 @@
 (ns baoqu.db.events
   (:require
-   [baoqu.db.connection :refer [connection]]
+   [baoqu.db.connection :refer [connection column-id just-first-row]]
    [yesql.core :refer [defqueries require-sql]]))
 
 (defqueries "baoqu/db/events.sql"
@@ -19,7 +19,13 @@
 (defn create
   "Create a new event and returns saved record"
   [event]
-  (q-create<! event))
+  (let [id (get (q-create<! event) column-id)]
+    (q-find-by-id {:id id} just-first-row)))
+
+(defn find-by-id
+  "Gets a given event by id"
+  [event-id]
+  (q-find-by-id {:id event-id}))
 
 (defn find-all
   "Gets all events"

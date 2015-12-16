@@ -5,7 +5,7 @@
             [baoqu.db.users :as db-users]
             [baoqu.utils.functions :as fn]))
 
-(def sample-event {:name "new event" :user-id 22 })
+(def sample-event {:name "new event" :user 22 })
 
 (defn drop-create
   []
