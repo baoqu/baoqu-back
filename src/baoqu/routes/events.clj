@@ -2,8 +2,9 @@
   (:require [baoqu.utils.mime :as mime]
             [baoqu.services.events :as service]
             [baoqu.services.users :as users]
-            [clojure.core.async :as async :refer [go-loop <! >! close!]]
-            [baoqu.utils.mime :as utils]))
+            [baoqu.utils.mime :as utils]
+            [catacumba.core :as cat]
+            [clojure.core.async :as a :refer [go-loop <! >!]]))
 
 (defn create
   "Creates a new event"
@@ -29,13 +30,25 @@
   [ctx]
   (mime/to-json (service/list-all)))
 
-(defn status
+(defn status-ws
   "Serves current event status"
   {:handler-type :catacumba/websocket}
-  [{:keys [in out]}]
-  (go-loop []
-    (if-let [received (<! in)]
-      (do
-        (>! out (utils/to-ws {:status "FATAL"}))
-        (recur))
-      (close! out))))
+  [{:keys [in out ctrl]}]
+  (let [ch (a/tap service/mult (a/chan))]
+    (println "empezando")
+    (go-loop []
+      (let [[v p] (a/alts! [ctrl ch])]
+        (cond
+          (= p ctrl)
+          (println "channel closed")
+
+          (= p ch)
+          (do
+            (println "something")
+            (>! out v)
+            (recur)))))))
+
+(defn status
+  [ctx]
+  (println "111")
+  (cat/websocket ctx status-ws))
