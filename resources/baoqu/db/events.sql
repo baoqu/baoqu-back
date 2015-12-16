@@ -24,3 +24,6 @@ INSERT INTO users_events (user_id, event_id) VALUES (:user, :event);
 
 -- name: q-find-user-event-by-id
 SELECT * FROM users_events WHERE id = :id;
+
+-- name: q-count-users-by-event-id
+SELECT count(distinct(user_id)) as users FROM users_events where event_id = :event

@@ -24,3 +24,13 @@
           event (:id (ev/create (:name sample-event) (:id user)))
           user-event (ev/join event user)]
       (is (fn/not-nil? user-event)))))
+
+(deftest join-all-users
+  (testing "when all users join a specific event")
+  (fix/create-drop)
+  (let [creator (:id (us/create sample-user))
+        event (:id (ev/create (:name sample-event) (:id creator)))]
+    ;; When all users join the event
+    (ev/join-all-users-to event)
+    ;; The event should have users
+    (is (> (ev/count-users-by-event event) 0))))

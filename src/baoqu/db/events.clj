@@ -64,3 +64,9 @@
   [event_id]
   (doseq [row (us/find-all)]
     (join event_id (:id row))))
+
+(defn count-users-by-event
+  "Counts users within a given event"
+  [event_id]
+  (q-count-users-by-event-id {:event event_id} {:result-set-fn first
+                                                :row-fn :users}))
