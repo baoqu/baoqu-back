@@ -25,20 +25,20 @@
 ;; URL MAPPINGS
 (def app
   (cat/routes [
-               ;; REST
                [:prefix "api"
+                ;; REST
                 [:any (misc/autoreloader)]
                 [:any (parse/body-params)]
                 [:any (misc/cors cors-conf)]
                 [:get "meta" #'home/hello-baoqu]
                 [:prefix "users"
+                 [:get #'users/list]
                  [:post "create" #'users/create]]
                 [:prefix "events"
                  [:post "create" #'events/create]
                  [:post ":id/users" #'events/join]]]
                ;; WEB SOCKETS
-               [:prefix "ws" [:any #'events/status]]
-               ]))
+               [:prefix "ws" [:any #'events/status]]]))
 
 ;; MAIN ENTRY
 (defn -main

@@ -21,3 +21,8 @@
     (if (is-valid json)
       (mime/to-json (service/create {:username (:username json)}))
       (mime/to-json (get-errors json)))))
+
+(defn list
+  "Lists all users"
+  [ctx]
+  (mime/to-json (service/list-all)))

@@ -5,3 +5,8 @@
   "Creates a new user with the name passed as parameter"
   [record]
   (db/create record))
+
+(defn list-all
+  "Lists all users"
+  []
+  (db/find-all))
