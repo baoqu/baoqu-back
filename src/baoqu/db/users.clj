@@ -1,6 +1,6 @@
 (ns baoqu.db.users
   (:require
-   [baoqu.db.connection :refer [connection]]
+   [baoqu.db.connection :refer [connection column-id just-first-row]]
    [yesql.core :refer [defqueries require-sql]]))
 
 (defqueries "baoqu/db/users.sql"
@@ -11,15 +11,30 @@
   []
   (q-create-users-table!))
 
-(defn create-user-event-table
+(defn drop-table
+  "Deletes user table"
+  []
+  (q-drop-users-table!))
+
+(defn create-users-events-table
   "Creates users_events table"
   []
   (q-create-users-events-table!))
 
+(defn drop-users-events-table
+  "Deletes users_events_table"
+  []
+  (q-drop-users-events-table!))
+
 (defn create
   "Inserts a new record in the database"
   [user]
-  (q-create<! user))
+  (let [id (get (q-create<! user) column-id)]
+    (q-find-by-id {:id id} just-first-row)))
+
+(defn find-by-id
+  [user-id]
+  (q-find-by-id {:id user-id}))
 
 (defn find-all
   "Returns all users"
