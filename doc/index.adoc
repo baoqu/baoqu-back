@@ -52,5 +52,7 @@ We are using `clojure.test`
 
 [source, clojure]
 ----
-include::{testBase}/baoqu/test/services/events.clj[tags=mocking-sample]
+include::{testBase}/baoqu/test/services/events.clj[]
 ----
+
+include::users.adoc[]
