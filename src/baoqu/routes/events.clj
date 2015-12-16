@@ -35,6 +35,6 @@
   (go-loop []
     (if-let [received (<! in)]
       (do
-        (>! out received)
+        (>! out (utils/to-ws {:status "FATAL"}))
         (recur))
       (close! out))))

@@ -1,5 +1,6 @@
 (ns baoqu.utils.mime
-  (:require [cheshire.core :as json]))
+  (:require [cheshire.core :as json]
+            [catacumba.serializers :as ws]))
 
 ;;            _                  _
 ;;           (_)                | |
@@ -25,3 +26,13 @@
   "Uses cheshire library to create a json from a data structure"
   [data]
   (json/generate-string data))
+
+(defn to-ws
+  "Uses library 'transit' to serialize messages to send through ws"
+  [data]
+  (ws/encode data :transit+json))
+
+(defn from-ws
+  "Uses library 'transit' to de-serialize messages coming from ws"
+  [data]
+  (ws/decode data :transit+json))
