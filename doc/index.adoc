@@ -20,6 +20,10 @@ Baoqu back-end dependencies are:
 include::{baseDir}/project.clj[tags=dependencies]
 ----
 
+WARNING: Jackson library is used to parse json data. Many libraries use
+it.  But sometimes there are some incompatibilities between them,
+that's why there is an exclusion to avoid certain versions.
+
 === Catacumba
 
 Catacumba is the toolkit chosen to handle front-end requests (both
@@ -56,3 +60,7 @@ include::{testBase}/baoqu/test/services/events.clj[]
 ----
 
 include::users.adoc[]
+
+include::events.adoc[]
+
+include::circles.adoc[]

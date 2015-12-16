@@ -1,0 +1,137 @@
+== Events
+
+=== List events
+
+Lists all available events
+
+==== Request
+
+List all events
+
+`GET /api/events`
+
+==== Response
+
+#TODO
+
+=== User joins event
+
+==== Request
+
+Joins a given user to a specific event
+
+`POST /api/events/{id}/users`
+
+* {id}: Event id
+
+.Body
+[source, json]
+----
+{"user_id": "22"}
+----
+
+==== Response
+
+#TODO
+
+=== Event status changed
+
+Incremental status event.
+
+`WS /ws/:event` (`BACK` -> `FRONT`)
+
+.Event
+[source,json]
+----
+{
+   "token" : "miguel.alalla@coasdf.com",
+   "topic" :"event/status",
+   "payload": {
+        "id": 1,
+        "name": "My event",
+        "circle-size": 3,
+        "approval-factor": 2, 
+        "circles": [
+          {
+            "id": 1,
+            "name": "Circle 1",
+            "participants": 3,
+            "most-voted-idea": "The idea itself",
+            "num-comments": 50,
+            "num-ideas": 7
+          },
+          {
+            "id": 2,
+            "name": "Circle 2",
+            "participants": 3,
+            "most-voted-idea": "The idea itself",
+            "num-comments": 50,
+            "num-ideas": 7
+           }
+         ]
+    }
+}
+----
+
+=== New circle added to event
+
+`WS /ws/:event/new-circle` (BACK -> FRONT)
+
+=== Add participant to a circle
+
+To add a participant to a pre-existent circle
+
+`WS /ws/:event/add-participant` 
+
+=== Circle promotes to different level
+
+`WS /ws/:event/promote-circle` (BACK-FRONT)
+
+=== Relocate participant
+
+`WS /ws/:event/relocate-participant` (BACK-FRONT)
+
+.Circle
+[source,json]
+----
+{
+  "id": 1,
+  "name": "Circle 1",
+  "level": 3,
+  "participants": [
+    {
+      "id": 1,
+      "name": "Alicia",
+      "avatar": "http://keys.com/2.jpg"
+    },
+    {
+      "id": 2,
+      "name": "Kyley",
+      "avatar": "http://minogue.com/1.jpg"
+    }
+  ],
+  "ideas": [
+    {
+      "id": 1,
+      "title": "My idea",
+      "votes": 2,
+      "voted-by-me": true
+    },
+    {
+      "id": 2,
+      "title": "My other idea",
+      "votes": 1,
+      "voted-by-me": false
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "author": 2,
+      "date": "2015-12-15T16:24:38.395Z",
+      "body": "You are an asshole"
+    }
+  ]
+}
+----
+

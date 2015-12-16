@@ -1,0 +1,68 @@
+== Circles
+
+=== Circle status changed
+
+`WS /ws/:circle/` (BACK -> FRONT)
+
+.Circle
+[source, json]
+----
+{
+  "id": 1,
+  "name": "My event",
+  "circle-size": 3,
+  "approval-factor": 2, 
+  "circles": [
+    {
+      "id": 1,
+      "name": "Circle 1",
+      "participants": 3,
+      "most-voted-idea": "The idea itself",
+      "num-comments": 50,
+      "num-ideas": 7
+    },
+    {
+      "id": 2,
+      "name": "Circle 2",
+      "participants": 3,
+      "most-voted-idea": "The idea itself",
+      "num-comments": 50,
+      "num-ideas": 7
+    }
+  ]
+}
+----
+
+=== To add an idea
+
+A user adds an idea 
+
+`WS /ws/:circle/add-idea!` (FRONT -> BACK)
+
+=== An idea has been added
+
+`WS /ws/:circle/add-idea` (BACK -> FRONT)
+
+=== To add a comment 
+
+`WS /ws/:circle/add-comment!` (FRONT-BACK)
+
+=== A comment has been added
+
+`WS /ws/:circle/add-comment` (BACK -> FRONT)
+
+=== To support an idea
+
+`WS /ws/:circle/support-idea!` (FRONT -> BACK)
+
+=== An idea has been supported
+
+`WS /ws/:circle/support-idea`
+
+=== To unsupport an idea
+
+`WS /ws/:circle/unsupport-idea!`
+
+=== An idea has been unsupported
+
+`WS /ws/:circle/unsupport-idea`
