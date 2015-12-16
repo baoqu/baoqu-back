@@ -14,16 +14,22 @@
   (fn/try-execute users/create-users-events-table))
 
 (defn load-users
+  "Create a list of users"
   []
   (users/create {:username "johny"}))
 
 (defn load-events
-  "Generate a list of users"
+  "Generate a list of events"
   []
   (events/create {:name "new-event"
                   :user "1"
                   :approval-factor 3
                   :circle-size 3}))
+
+(defn join-users
+  "Joins existing users to the created event"
+  []
+  )
 
 (defn load-all
   "Loads all fixtures"
