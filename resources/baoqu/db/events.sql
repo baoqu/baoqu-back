@@ -14,10 +14,13 @@ DROP TABLE events;
 INSERT INTO events (`name`, created_by) VALUES (:name, :user);
 
 -- name: q-find-all
-SELECT * FROM events
+SELECT * FROM events;
 
 -- name: q-find-by-id
-SELECT * FROM events where id = :id
+SELECT * FROM events where id = :id;
 
--- name: q-join-event!
-INSERT INTO users_events (user_id, event_id) VALUES (:user, :event)
+-- name: q-join-event<!
+INSERT INTO users_events (user_id, event_id) VALUES (:user, :event);
+
+-- name: q-find-user-event-by-id
+SELECT * FROM users_events WHERE id = :id;

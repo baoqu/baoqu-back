@@ -16,24 +16,31 @@
 (defn load-users
   "Create a list of users"
   []
-  (users/create {:username "johny"}))
+  (users/create {:username "john.doe.1@corporation.com"})
+  (users/create {:username "john.doe.2@corporation.com"})
+  (users/create {:username "john.doe.3@corporation.com"})
+  (users/create {:username "john.doe.4@corporation.com"}))
 
-(defn load-events
+(defn load-default-event
   "Generate a list of events"
   []
-  (events/create {:name "new-event"
-                  :user "1"
-                  :approval-factor 3
-                  :circle-size 3}))
+  (let [saved (events/create {:name "Piweek 2016"
+                              :user "1"
+                              :approval-factor 3
+                              :circle-size 3})]
+    (:id saved)))
 
-(defn join-users
-  "Joins existing users to the created event"
-  []
-  )
+(defn join-users-to-default-event
+  "Joins existing users to the created event and returns
+  id of the created event"
+  [event_id]
+  (events/join-all-users-to event_id))
 
 (defn load-all
   "Loads all fixtures"
   []
   (create-drop)
   (load-users)
-  (load-events))
+  (->>
+   (load-default-event)
+   (join-users-to-default-event)))
