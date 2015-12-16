@@ -3,6 +3,7 @@
             [baoqu.services.events :as service]
             [baoqu.services.users :as users]
             [baoqu.utils.mime :as utils]
+            [baoqu.ws.events :as ws]
             [catacumba.core :as cat]
             [clojure.core.async :as a :refer [go-loop <! >!]]))
 
@@ -30,11 +31,11 @@
   [ctx]
   (mime/to-json (service/list-all)))
 
-(defn status-ws
+(defn status
   "Serves current event status"
   {:handler-type :catacumba/websocket}
   [{:keys [in out ctrl]}]
-  (let [ch (a/tap service/mult (a/chan))]
+  (let [ch (a/tap ws/events-mult (a/chan))]
     (println "empezando")
     (go-loop []
       (let [[v p] (a/alts! [ctrl ch])]
@@ -47,8 +48,3 @@
             (println "something")
             (>! out v)
             (recur)))))))
-
-(defn status
-  [ctx]
-  (println "111")
-  (cat/websocket ctx status-ws))
