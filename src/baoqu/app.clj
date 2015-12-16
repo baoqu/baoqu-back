@@ -18,7 +18,7 @@
 ;;                                |_|   |_|            |___/
 
 ;; CORS
-(def cors-conf {:origin #{"http://website.com"}
+(def cors-conf {:origin "*"
                 :max-age 3600
                 :allow-headers ["X-Requested-With", "Content-Type"]})
 
@@ -28,8 +28,8 @@
                ;; REST
                [:prefix "api"
                 [:any (misc/autoreloader)]
-                [:any (misc/cors cors-conf)]
                 [:any (parse/body-params)]
+                [:any (misc/cors cors-conf)]
                 [:get "meta" #'home/hello-baoqu]
                 [:prefix "users"
                  [:post "create" #'users/create]]
