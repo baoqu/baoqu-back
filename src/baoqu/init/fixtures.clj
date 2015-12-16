@@ -1,13 +1,17 @@
 (ns baoqu.init.fixtures
   (:require [baoqu.db.events :as events]
+            [baoqu.utils.functions :as fn]
             [baoqu.db.users :as users]))
 
-(defn create-tables
+(defn create-drop
   "Creates database schema"
   []
-  (events/create-table)
-  (users/create-table)
-  (users/create-user-event-table))
+  (fn/try-execute users/drop-users-events-table)
+  (fn/try-execute users/drop-table)
+  (fn/try-execute events/drop-table)
+  (fn/try-execute users/create-table)
+  (fn/try-execute events/create-table)
+  (fn/try-execute users/create-users-events-table))
 
 (defn load-users
   []
@@ -24,6 +28,6 @@
 (defn load-all
   "Loads all fixtures"
   []
-  (create-tables)
+  (create-drop)
   (load-users)
   (load-events))

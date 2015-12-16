@@ -1,24 +1,16 @@
 (ns baoqu.test.services.events
   (:use [clojure.test])
   (:require [baoqu.services.events :as ev]
+            [baoqu.init.fixtures :as fix]
             [baoqu.db.events :as db-events]
             [baoqu.db.users :as db-users]
             [baoqu.utils.functions :as fn]))
 
 (def sample-event {:name "new event" :user 22 })
 
-(defn drop-create
-  []
-  (fn/try-execute db-users/drop-users-events-table)
-  (fn/try-execute db-users/drop-table)
-  (fn/try-execute db-events/drop-table)
-  (fn/try-execute db-users/create-table)
-  (fn/try-execute db-events/create-table)
-  (fn/try-execute db-users/create-users-events-table))
-
 (deftest create
   (testing "it should return the same structure"
-    (drop-create)
+    (fix/create-drop)
     (let [sample sample-event
           user (:user sample)
           name (:name sample)
