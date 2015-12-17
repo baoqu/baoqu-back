@@ -1,17 +1,30 @@
 (ns baoqu.init.fixtures
   (:require [baoqu.db.events :as events]
             [baoqu.utils.functions :as fn]
-            [baoqu.db.users :as users]))
+            [baoqu.db.users :as users]
+            [baoqu.db.circles :as circles]))
 
 (defn create-drop
   "Creates database schema"
   []
+  ;; DROPPING
   (fn/try-execute users/drop-users-events-table)
   (fn/try-execute users/drop-table)
   (fn/try-execute events/drop-table)
+  (fn/try-execute circles/drop-table)
+  (fn/try-execute circles/drop-comments-table)
+  (fn/try-execute circles/drop-ideas-table)
+  (fn/try-execute circles/drop-participants-table)
+  (fn/try-execute circles/drop-ideas-participants-table)
+  ;; CREATING
   (fn/try-execute users/create-table)
   (fn/try-execute events/create-table)
-  (fn/try-execute users/create-users-events-table))
+  (fn/try-execute users/create-users-events-table)
+  (fn/try-execute circles/create-table)
+  (fn/try-execute circles/create-comments-table)
+  (fn/try-execute circles/create-ideas-table)
+  (fn/try-execute circles/create-participants-table)
+  (fn/try-execute circles/create-ideas-participants-table))
 
 (defn load-users
   "Create a list of users"
