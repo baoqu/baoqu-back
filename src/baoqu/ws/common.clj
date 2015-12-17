@@ -15,4 +15,4 @@
 (defn send
   "Sends messages to events topic"
   [topic message]
-  (a/put! events-bus message))
+  (a/put! events-bus (merge {:topic topic} message)))
