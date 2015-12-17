@@ -1,13 +1,15 @@
 (ns baoqu.ws.events
   (:require [baoqu.ws.common :as ws]
             [baoqu.db.users :as us]
+            [baoqu.db.circles :as ci]
             [baoqu.db.events :as ev]))
 
 (defn create-circle
   "Sends an event that a circle of a given
    event has been created"
   [circle-id]
-  (ws/send :events/create-circle {:id "999"}))
+  (let [circle (ci/find-by-id circle-id)]
+    (ws/send :events/create-circle circle)))
 
 (defn add-participant
   "Sends an event that a participant has been

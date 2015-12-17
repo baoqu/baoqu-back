@@ -35,16 +35,16 @@
 ;;     | |
 ;;     |_|
 
-(defn create
-  "Create a new event and returns saved record"
-  [event]
-  (let [id (get (q-create<! event) column-id)]
-    (q-find-by-id {:id id} just-first-row)))
-
 (defn find-by-id
   "Gets a given event by id"
   [event-id]
   (q-find-by-id {:id event-id} just-first-row))
+
+(defn create
+  "Create a new event and returns saved record"
+  [event]
+  (let [id (get (q-create<! event) column-id)]
+    (find-by-id id)))
 
 (defn find-all
   "Gets all events"

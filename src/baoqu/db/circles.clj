@@ -75,6 +75,10 @@
 ;;     | |
 ;;     |_|
 
+(defn find-by-id
+  [circle-id]
+  (q-find-circle-by-id {:id circle-id} just-first-row))
+
 (defn add-circle-to-event
   "Creates a new event in a given event"
   [event_id circle]
@@ -83,7 +87,7 @@
     (let [id (get (q-create-circle<! {:name name
                                       :level level
                                       :event event_id}) column-id)]
-      (q-find-circle-by-id {:id id} just-first-row))))
+      (find-by-id id))))
 
 (defn add-participant-to-circle
   "Adds a user to a given circle"
