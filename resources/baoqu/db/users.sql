@@ -12,10 +12,10 @@ DROP TABLE users;
 INSERT INTO users (username) VALUES (:username);
 
 -- name: q-find-all
-SELECT * FROM users;
+SELECT * FROM users ORDER BY id asc;
 
 -- name: q-find-by-id
-SELECT * FROM users where id = :id
+SELECT * FROM users where id = :id ORDER BY id asc;
 
 -- name: q-find-by-username
 SELECT * FROM users where username = :username;
