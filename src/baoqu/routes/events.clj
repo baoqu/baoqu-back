@@ -47,16 +47,18 @@
 ;;   \_/\_/ \___|_.__/|___/\___/ \___|_|\_\___|\__|___/
 ;;
 
-(defn status
-  "Serves current event status"
+(defn subscribe-to-events
   {:handler-type :catacumba/websocket}
   [{:keys [in out ctrl]}]
-  (let [ch (ws/create-channel)]
+  (let [ch (ws/subscribe)]
     (go-loop []
       (let [[v p] (a/alts! [ctrl ch])]
         (cond
           (= p ctrl)
-          (println "closed")
+          (do
+            (println "closed")
+            (a/close! ch))
+
           ;; END
           (= p ch)
           (do

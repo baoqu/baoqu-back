@@ -39,7 +39,7 @@
                  [:post "create" #'events/create]
                  [:post ":id/users" #'events/join]]]
                ;; WEB SOCKETS
-               [:prefix "ws" [:any #'events/status]]]))
+               [:prefix "ws" [:any #'events/subscribe-to-events]]]))
 
 ;; MAIN ENTRY
 (defn -main

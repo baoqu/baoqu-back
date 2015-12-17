@@ -7,7 +7,7 @@
 
 (def events-mult (a/mult events-bus))
 
-(defn create-channel
+(defn subscribe
   "Creates a new core.async channel"
   []
   (a/tap events-mult (a/chan)))

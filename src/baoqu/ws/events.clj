@@ -11,7 +11,7 @@
   "Sends an event that a participant has been
    added to a given circle"
   [participant-id]
-  (ws/send :events/add-partipant {:id "999"}))
+  (ws/send :events/add-participant {:id "999"}))
 
 (defn status-changed
   "Sends an event that a event has changed"
