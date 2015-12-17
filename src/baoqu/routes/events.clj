@@ -56,6 +56,7 @@
       (let [[v p] (a/alts! [ctrl ch])]
         (cond
           (= p ctrl)
+          (println "closed")
           ;; END
           (= p ch)
           (do
