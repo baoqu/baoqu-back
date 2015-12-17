@@ -3,7 +3,7 @@
             [baoqu.services.events :as service]
             [baoqu.services.users :as users]
             [baoqu.utils.mime :as utils]
-            [baoqu.ws.events :as ws]
+            [baoqu.ws.common :as ws]
             [catacumba.core :as cat]
             [clojure.core.async :as a :refer [go-loop <! >!]]))
 
