@@ -6,6 +6,9 @@ CREATE TABLE circles (
     `level` INTEGER
 );
 
+-- name: q-create-circle<!
+INSERT INTO circles (event_id, `name`, `level`) VALUES (:event, :name, :level);
+
 -- name: q-drop-circles-table!
 DROP TABLE circles;
 
@@ -35,9 +38,11 @@ DROP TABLE ideas;
 CREATE TABLE participants (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     user_id INTEGER,
-    circle_id INTEGER,
-    avatar text
+    circle_id INTEGER
 );
+
+-- name: q-add-participant-to-circle<!
+INSERT INTO participants (user_id, circle_id) VALUES (:user, :circle);
 
 -- name: q-drop-participants-table!
 DROP TABLE participants;

@@ -74,3 +74,17 @@
 ;;  \__, |\__,_|\___|_|  |_|\___||___/
 ;;     | |
 ;;     |_|
+
+(defn add-circle-to-event
+  "Creates a new event in a given event"
+  [event_id circle]
+  (let [name (:name circle)
+        level (:level circle)]
+    (q-create-circle<! {:name name
+                      :level level
+                      :event event_id})))
+
+(defn add-participant-to-circle
+  "Adds a user to a given circle"
+  [circle_id user_id]
+  (q-add-participant-to-circle<! {:user user_id :circle circle_id}))

@@ -1,5 +1,9 @@
 -- name: q-create-users-table!
-CREATE TABLE users (id INTEGER PRIMARY KEY AUTOINCREMENT, username varchar(255));
+CREATE TABLE users (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    username varchar(255),
+    avatar text
+);
 
 -- name: q-drop-users-table!
 DROP TABLE users;
