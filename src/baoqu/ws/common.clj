@@ -23,7 +23,9 @@
 (defn send
   "Sends messages to events topic"
   [topic message]
-  (a/put! events-bus (merge {:topic topic} message)))
+  (let [payload (merge {:topic topic} message)]
+    (println payload) ;; DEBUG
+    (a/put! events-bus payload)))
 
 ;;      _ _                 _       _
 ;;     | (_)               | |     | |

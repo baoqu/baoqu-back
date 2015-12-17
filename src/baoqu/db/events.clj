@@ -72,3 +72,8 @@
   [event_id]
   (q-count-users-by-event-id {:event event_id} {:result-set-fn first
                                                 :row-fn :users}))
+
+(defn find-by-circle
+  "Finds the event a circle belongs to"
+  [circle-id]
+  (q-find-by-circle-id {:id circle-id} just-first-row))

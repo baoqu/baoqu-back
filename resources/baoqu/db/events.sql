@@ -27,3 +27,8 @@ SELECT * FROM users_events WHERE id = :id;
 
 -- name: q-count-users-by-event-id
 SELECT count(distinct(user_id)) as users FROM users_events where event_id = :event
+
+-- name: q-find-by-circle-id
+SELECT distinct(ev.id) from events ev JOIN circles ci WHERE
+  ci.event_id = ev.id AND
+  ci.id = :id;

@@ -12,9 +12,8 @@
 (defn join
   "Adds a user to the current event"
   [id user_id]
-  (let [joined (db/join id user_id)]
-    (ws/user-joined {:id 1})
-    (c/add-participant id user_id)
+  (let [joined      (db/join id user_id)
+        participant (c/add-participant id user_id)]
     joined))
 
 (defn join-all-users-to

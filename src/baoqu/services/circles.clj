@@ -17,10 +17,10 @@
   "Adds a given user to a given circle as a participant"
   [user-id circle]
   (let [circle-id      (:id circle)
-        event-id       (:event circle)
-        participant    (c/add-participant-to-circle circle-id user-id)
+        event-id       (:event_id circle)
+        participant    (c/add-participant-to-circle event-id user-id)
         participant-id (:id participant)]
-    (ws/add-participant participant-id)
+    (ws/add-participant participant)
     (ws/change-status event-id)))
 
 (defn add-participant
@@ -28,3 +28,8 @@
   [event-id user-id]
   (let [circle (find-or-create-circle event-id)]
     (add-user-to-circle user-id circle)))
+
+(defn find-all-participants
+  "Lists all participants"
+  []
+  (c/find-all-participants))

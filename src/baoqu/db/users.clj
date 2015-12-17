@@ -52,7 +52,7 @@
 
 (defn find-by-id
   [user-id]
-  (q-find-by-id {:id user-id}))
+  (q-find-by-id {:id user-id} just-first-row))
 
 (defn find-all
   "Returns all users"

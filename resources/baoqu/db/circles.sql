@@ -60,7 +60,10 @@ CREATE TABLE participants (
 INSERT INTO participants (user_id, circle_id) VALUES (:user, :circle);
 
 -- name: q-find-participant-by-id
-SELECT * FROM participants WHERE id = :id;
+SELECT id, user_id, circle_id FROM participants WHERE id = :id;
+
+-- name: q-find-all-participants
+SELECT * FROM participants;
 
 -- name: q-drop-participants-table!
 DROP TABLE participants;
