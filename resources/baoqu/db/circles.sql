@@ -27,9 +27,12 @@ DROP TABLE comments;
 -- name: q-create-ideas-table!
 CREATE TABLE ideas (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    circle_id INTEGER,
+    participant_id INTEGER,
     title varchar(255)
 );
+
+-- name: q-add-idea-to-circle<!
+INSERT INTO ideas (participant_id, title) VALUES (:participant,:title);
 
 -- name: q-drop-ideas-table!
 DROP TABLE ideas;

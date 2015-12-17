@@ -88,3 +88,8 @@
   "Adds a user to a given circle"
   [circle_id user_id]
   (q-add-participant-to-circle<! {:user user_id :circle circle_id}))
+
+(defn add-idea-to-circle
+  [participant idea]
+  (q-add-idea-to-circle<! {:participant participant
+                           :title idea}))

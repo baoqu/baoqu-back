@@ -25,3 +25,12 @@
           circle (circles/add-circle-to-event {:id event} sample-circle)
           participant (circles/add-participant-to-circle (:id circle) 1)]
       (is (fn/not-nil? {:user_id participant})))))
+
+(deftest add-idea-to-circle
+  (testing "when adding an idea to a given circle"
+    (fix/create-drop)
+     (let [event (events/create sample-event)
+           circle (circles/add-circle-to-event {:id event} sample-circle)
+           participant (circles/add-participant-to-circle (:id circle) 1)
+           idea (circles/add-idea-to-circle (:id participant) "my idea")]
+       (is (fn/not-nil? {:id idea})))))
