@@ -27,7 +27,6 @@
 (defn join
   "Adds a given user to the current event"
   [ctx]
-  ;;  (let [id (get-in ctx [:route-params :id])
   (let [json (:data ctx)
         id      (:id (first (service/list-all)))
         user_id (:id (users/find-by-username (:username json)))]

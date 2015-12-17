@@ -27,8 +27,8 @@
   (cat/routes [
                [:prefix "api"
                 ;; REST
-                [:any (misc/autoreloader)]
                 [:any (parse/body-params)]
+                [:any (misc/autoreloader)]
                 [:any (misc/cors cors-conf)]
                 [:get "meta" #'home/hello-baoqu]
                 [:prefix "users"
