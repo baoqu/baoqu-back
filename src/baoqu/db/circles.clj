@@ -80,14 +80,16 @@
   [event_id circle]
   (let [name (:name circle)
         level (:level circle)]
-    (q-create-circle<! {:name name
-                      :level level
-                      :event event_id})))
+    (let [id (get (q-create-circle<! {:name name
+                                      :level level
+                                      :event event_id}) column-id)]
+      (q-find-circle-by-id {:id id} just-first-row))))
 
 (defn add-participant-to-circle
   "Adds a user to a given circle"
   [circle_id user_id]
-  (q-add-participant-to-circle<! {:user user_id :circle circle_id}))
+  (let [id (get (q-add-participant-to-circle<! {:user user_id :circle circle_id}) column-id)]
+    (q-find-participant-by-id {:id id} just-first-row)))
 
 (defn find-available-circle
   "Finds an available circle for a given event. That means
@@ -98,5 +100,5 @@
 (defn add-idea-to-circle
   "Adds an idea to a given circle"
   [participant_id idea]
-  (q-add-idea-to-circle<! {:participant participant_id
-                           :title idea}))
+  (let [id (get (q-add-idea-to-circle<! {:participant participant_id :title idea}) column-id)]
+    (q-find-idea-by-id {:id id} just-first-row)))

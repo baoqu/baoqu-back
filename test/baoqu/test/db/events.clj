@@ -16,19 +16,3 @@
       (is (fn/not-nil? saved))
       (is (= s-name "new event"))
       (is (= s-user 22)))))
-
-(deftest find-by-id
-  (testing "when trying to get an existing event by id"
-    (is (= 1 1))))
-
-(deftest find-all
-  (testing "listing all events"
-    (is (= 1 1))))
-
-(deftest find-user-event-by-id
-  (testing "find a user event "
-    (is (= 1 1))))
-
-(deftest count-users-by-event
-  (testing "counts how many users there are in an event"
-    (is (= 1 1))))

@@ -9,6 +9,9 @@ CREATE TABLE circles (
 -- name: q-create-circle<!
 INSERT INTO circles (event_id, `name`, `level`) VALUES (:event, :name, :level);
 
+-- name: q-find-circle-by-id
+SELECT * FROM circles WHERE id = :id;
+
 -- name: q-find-available-circle
 SELECT c.id, count() FROM CIRCLES c JOIN participants p WHERE
     c.event_id = :event
@@ -40,6 +43,9 @@ CREATE TABLE ideas (
 -- name: q-add-idea-to-circle<!
 INSERT INTO ideas (participant_id, title) VALUES (:participant,:title);
 
+-- name: q-find-idea-by-id
+SELECT * FROM ideas where id = :id;
+
 -- name: q-drop-ideas-table!
 DROP TABLE ideas;
 
@@ -52,6 +58,9 @@ CREATE TABLE participants (
 
 -- name: q-add-participant-to-circle<!
 INSERT INTO participants (user_id, circle_id) VALUES (:user, :circle);
+
+-- name: q-find-participant-by-id
+SELECT * FROM participants WHERE id = :id;
 
 -- name: q-drop-participants-table!
 DROP TABLE participants;
