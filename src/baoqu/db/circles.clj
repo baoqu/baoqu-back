@@ -91,7 +91,7 @@
 
 (defn find-available-circle
   [event_id]
-  (q-find-available-circle {:event event_id}))
+  (q-find-available-circle {:event event_id :factor 3}))
 
 (defn add-idea-to-circle
   [participant_id idea]

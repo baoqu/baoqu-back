@@ -10,9 +10,9 @@ CREATE TABLE circles (
 INSERT INTO circles (event_id, `name`, `level`) VALUES (:event, :name, :level);
 
 -- name: q-find-available-circle
-SELECT * FROM CIRCLE c JOIN participants p WHERE
-    c.id       = p.circle_id
+SELECT c.id, count() FROM CIRCLES c JOIN participants p WHERE
     c.event_id = :event
+GROUP BY c.id
 HAVING count() < :factor;
 
 -- name: q-drop-circles-table!
