@@ -90,10 +90,13 @@
   (q-add-participant-to-circle<! {:user user_id :circle circle_id}))
 
 (defn find-available-circle
+  "Finds an available circle for a given event. That means
+   there are fewer people than the factor"
   [event_id]
   (q-find-available-circle {:event event_id :factor 3}))
 
 (defn add-idea-to-circle
+  "Adds an idea to a given circle"
   [participant_id idea]
   (q-add-idea-to-circle<! {:participant participant_id
                            :title idea}))

@@ -15,15 +15,18 @@
           user (:user sample)
           name (:name sample)
           result (ev/create name user)]
-      (is (= (:name result) "new event")))))
+      (is (= (:name result) "new event"))
+      (is (= (:created_by result) 22)))))
 
 (deftest join-user
   (testing "a given user joins an event"
     (fix/create-drop)
-    (let [user (:id (us/create sample-user))
-          event (:id (ev/create (:name sample-event) (:id user)))
+    (let [user       (:id (us/create sample-user))
+          event      (:id (ev/create (:name sample-event) (:id user)))
           user-event (ev/join event user)]
-      (is (fn/not-nil? user-event)))))
+      (is (fn/not-nil? user-event))
+      (is (fn/not-nil? (:user_id user-event)))
+      (is (fn/not-nil? (:event_id user-event))))))
 
 (deftest join-all-users
   (testing "when all users join a specific event")

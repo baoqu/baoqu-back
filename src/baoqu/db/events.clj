@@ -59,7 +59,7 @@
   "Inserts a new entry to user_events table"
   [id user_id]
   (let [id (get (q-join-event<! {:event id :user user_id}) column-id)]
-    (q-find-user-event-by-id {:id id})))
+    (q-find-user-event-by-id {:id id} just-first-row)))
 
 (defn join-all-users-to
   "Joins all users to a specific event"
