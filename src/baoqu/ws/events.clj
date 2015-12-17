@@ -1,18 +1,23 @@
 (ns baoqu.ws.events
-  (:require [clojure.core.async :as a]
-            [baoqu.utils.mime :as mime]))
+  (:require [baoqu.ws.common :as ws]))
 
-(def events-bus
-  (a/chan 1 (map (fn [msg] (String. (mime/to-ws msg))))))
+(defn circle-created
+  "Sends an event that a circle of a given
+   event has been created"
+  [circle-id]
+  (ws/send :events/create-circle {:id "999"}))
 
-(def events-mult (a/mult events-bus))
+(defn participant-added
+  "Sends an event that a participant has been
+   added to a given circle"
+  [participant-id]
+  (ws/send :events/add-partipant {:id "999"}))
 
-(defn create-channel
-  "Creates a new core.async channel"
-  []
-  (a/tap events-mult (a/chan)))
+(defn status-changed
+  "Sends an event that a event has changed"
+  [event-id]
+  (ws/send :events/status {:id "999"}))
 
-(defn events
-  "Sends messages to events topic"
-  [message]
-  (a/put! events-bus message))
+(defn user-joined
+  [user]
+  (ws/send :events/join-user user))

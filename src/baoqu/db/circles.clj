@@ -89,7 +89,11 @@
   [circle_id user_id]
   (q-add-participant-to-circle<! {:user user_id :circle circle_id}))
 
+(defn find-available-circle
+  [event_id]
+  (q-find-available-circle {:event event_id}))
+
 (defn add-idea-to-circle
-  [participant idea]
-  (q-add-idea-to-circle<! {:participant participant
+  [participant_id idea]
+  (q-add-idea-to-circle<! {:participant participant_id
                            :title idea}))
