@@ -52,14 +52,19 @@
   [{:keys [in out ctrl]}]
   (let [ch (ws/subscribe)]
     (go-loop []
-      (let [[v p] (a/alts! [ctrl ch])]
+      (let [[v p] (a/alts! [ctrl ch in])]
         (cond
+          ;; RECEIVING MESSAGES FROM FRONT
+          (= p in)
+          (do ws/dispatch v)
+
+          ;; NORMALLY CAUSE FRONT HAS CLOSED
           (= p ctrl)
           (do
             (println "closed")
             (a/close! ch))
 
-          ;; END
+          ;; SENDING MESSAGES TO SUBSCRIBERS
           (= p ch)
           (do
             (>! out v)

@@ -2,12 +2,6 @@
   (:require [baoqu.db.circles :as c]
             [baoqu.ws.events :as ws]))
 
-(defn add-participant
-  "Adds a existing participant to an available circle"
-  [event-id user-id]
-  (let [circle (find-or-create-circle event-id)]
-    (add-user-to-circle user-id circle)))
-
 (defn find-or-create-circle
   "Finds an available circle, if not it creates
   a new one for the current event-id"
@@ -15,8 +9,8 @@
   (let [circle (c/find-available-circle event-id)]
     (if circle
       circle
-      (let [circle (create-circle event-id)]
-        (ws/circle-created circle-id)
+      (let [circle (c/add-circle-to-event event-id {:name "circle"})]
+        (ws/create-circle (:id circle))
         circle))))
 
 (defn add-user-to-circle
@@ -26,5 +20,11 @@
         event-id       (:event circle)
         participant    (c/add-participant-to-circle circle-id user-id)
         participant-id (:id participant)]
-    (ws/participant-added participant-id)
-    (ws/status-changed event-id)))
+    (ws/add-participant participant-id)
+    (ws/change-status event-id)))
+
+(defn add-participant
+  "Adds a existing participant to an available circle"
+  [event-id user-id]
+  (let [circle (find-or-create-circle event-id)]
+    (add-user-to-circle user-id circle)))

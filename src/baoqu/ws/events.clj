@@ -1,19 +1,19 @@
 (ns baoqu.ws.events
   (:require [baoqu.ws.common :as ws]))
 
-(defn circle-created
+(defn create-circle
   "Sends an event that a circle of a given
    event has been created"
   [circle-id]
   (ws/send :events/create-circle {:id "999"}))
 
-(defn participant-added
+(defn add-participant
   "Sends an event that a participant has been
    added to a given circle"
   [participant-id]
   (ws/send :events/add-participant {:id "999"}))
 
-(defn status-changed
+(defn change-status
   "Sends an event that a event has changed"
   [event-id]
   (ws/send :events/status {:id "999"}))

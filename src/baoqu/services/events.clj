@@ -1,6 +1,7 @@
 (ns baoqu.services.events
   (:require [baoqu.db.events :as db]
             [baoqu.utils.mime :as mime]
+            [baoqu.services.circles :as c]
             [baoqu.ws.events :as ws]))
 
 (defn create
@@ -13,6 +14,7 @@
   [id user_id]
   (let [joined (db/join id user_id)]
     (ws/user-joined joined)
+    (c/add-participant id user_id)
     joined))
 
 (defn join-all-users-to
