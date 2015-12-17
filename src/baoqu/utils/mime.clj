@@ -30,7 +30,7 @@
 (defn to-ws
   "Uses library 'transit' to serialize messages to send through ws"
   [data]
-  (String. (ws/encode data :transit+json)))
+  (ws/encode data :transit+json))
 
 (defn from-ws
   "Uses library 'transit' to de-serialize messages coming from ws"

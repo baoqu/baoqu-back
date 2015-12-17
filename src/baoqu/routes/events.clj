@@ -7,6 +7,14 @@
             [catacumba.core :as cat]
             [clojure.core.async :as a :refer [go-loop <! >!]]))
 
+;;                _
+;;               | |
+;;  _ __ ___  ___| |_
+;; | '__/ _ \/ __| __|
+;; | | |  __/\__ \ |_
+;; |_|  \___||___/\__|
+;;
+
 (defn create
   "Creates a new event"
   [ctx]
@@ -31,20 +39,25 @@
   [ctx]
   (mime/to-json (service/list-all)))
 
+;;               _                    _        _
+;;              | |                  | |      | |
+;; __      _____| |__  ___  ___   ___| | _____| |_ ___
+;; \ \ /\ / / _ \ '_ \/ __|/ _ \ / __| |/ / _ \ __/ __|
+;;  \ V  V /  __/ |_) \__ \ (_) | (__|   <  __/ |_\__ \
+;;   \_/\_/ \___|_.__/|___/\___/ \___|_|\_\___|\__|___/
+;;
+
 (defn status
   "Serves current event status"
   {:handler-type :catacumba/websocket}
   [{:keys [in out ctrl]}]
-  (let [ch (a/tap ws/events-mult (a/chan))]
-    (println "empezando")
+  (let [ch (ws/create-channel)]
     (go-loop []
       (let [[v p] (a/alts! [ctrl ch])]
         (cond
           (= p ctrl)
-          (println "channel closed")
-
+          ;; END
           (= p ch)
           (do
-            (println "something")
             (>! out v)
             (recur)))))))
