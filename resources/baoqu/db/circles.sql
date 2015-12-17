@@ -3,7 +3,7 @@ CREATE TABLE circles (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     event_id INTEGER,
     `name` varchar(255),
-    `level` INTEGER
+    `level` INTEGER DEFAULT 1
 );
 
 -- name: q-create-circle<!

@@ -2,8 +2,8 @@
 CREATE TABLE events (
        id INTEGER PRIMARY KEY AUTOINCREMENT,
        `name` varchar(255),
-       circle_size int,
-       approval_factor int,
+       circle_size int DEFAULT 3,
+       approval_factor int DEFAULT 1,
        created_by int
 );
 

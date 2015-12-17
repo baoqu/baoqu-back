@@ -44,7 +44,7 @@
 (defn find-by-id
   "Gets a given event by id"
   [event-id]
-  (q-find-by-id {:id event-id}))
+  (q-find-by-id {:id event-id} just-first-row))
 
 (defn find-all
   "Gets all events"

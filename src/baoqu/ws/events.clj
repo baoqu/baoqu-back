@@ -21,8 +21,8 @@
                                     :name (:username user)
                                     :circle circle-id
                                     :event (:id event)})))
-
 (defn change-status
   "Sends an event that a event has changed"
   [event-id]
-  (ws/send :events/status {:id "999"}))
+  (let [event (ev/find-by-id event-id)]
+        (ws/send :events/status event)))
