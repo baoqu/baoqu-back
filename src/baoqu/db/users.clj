@@ -1,10 +1,10 @@
 (ns baoqu.db.users
   (:require
-   [baoqu.db.common :refer [connection column-id just-first-row]]
-   [yesql.core :refer [defqueries require-sql]]))
+   [baoqu.db.common :as q]
+   [yesql.core :refer [defqueries]]))
 
 (defqueries "baoqu/db/users.sql"
-  {:connection connection})
+  {:connection q/connection})
 
 ;;                      _                      _
 ;;                     | |                    | |
@@ -44,15 +44,17 @@
 ;;     | |
 ;;     |_|
 
+(defn find-by-id
+  "Finds a user by its id"
+  [user-id]
+  (q/q-find q-find-by-id {:id user-id}))
+
 (defn create
   "Inserts a new record in the database"
   [user]
-  (let [id (get (q-create<! user) column-id)]
-    (q-find-by-id {:id id} just-first-row)))
-
-(defn find-by-id
-  [user-id]
-  (q-find-by-id {:id user-id} just-first-row))
+  (->
+   (q/q-do-id q-create<! user)
+   (find-by-id)))
 
 (defn find-all
   "Returns all users"
@@ -62,4 +64,4 @@
 (defn find-by-username
   "Gets a given user by his/her username"
   [username]
-  (q-find-by-username {:username username} just-first-row))
+  (q/q-find q-find-by-username {:username username}))

@@ -2,7 +2,7 @@
   (:require
    [baoqu.db.common :as q]
    [baoqu.db.users :as us]
-   [yesql.core :refer [defqueries require-sql]]))
+   [yesql.core :refer [defqueries]]))
 
 (defqueries "baoqu/db/events.sql"
   {:connection q/connection})
