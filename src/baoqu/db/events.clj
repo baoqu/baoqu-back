@@ -1,11 +1,11 @@
 (ns baoqu.db.events
   (:require
-   [baoqu.db.connection :refer [connection column-id just-first-row]]
+   [baoqu.db.common :as q]
    [baoqu.db.users :as us]
    [yesql.core :refer [defqueries require-sql]]))
 
 (defqueries "baoqu/db/events.sql"
-  {:connection connection})
+  {:connection q/connection})
 
 ;;                      _                      _
 ;;                     | |                    | |
@@ -38,13 +38,14 @@
 (defn find-by-id
   "Gets a given event by id"
   [event-id]
-  (q-find-by-id {:id event-id} just-first-row))
+  (q/q-find q-events-by-id {:id event-id}))
 
 (defn create
   "Create a new event and returns saved record"
   [event]
-  (let [id (get (q-create<! event) column-id)]
-    (find-by-id id)))
+  (->
+   (q/q-do-id q-create<! event)
+   (find-by-id)))
 
 (defn find-all
   "Gets all events"
@@ -52,14 +53,17 @@
   (q-find-all))
 
 (defn find-user-event-by-id
+  "Gets the user identified by the id passed as
+   parameter"
   [id]
-  (q-find-user-event-by-id {:id id} just-first-row))
+  (q/q-find q-user-event-by-id {:id id}))
 
 (defn join
   "Inserts a new entry to user_events table"
   [id user_id]
-  (let [id (get (q-join-event<! {:event id :user user_id}) column-id)]
-    (q-find-user-event-by-id {:id id} just-first-row)))
+  (->
+   (q/q-do-id q-join-event<! {:event id :user user_id})
+   (find-user-event-by-id)))
 
 (defn join-all-users-to
   "Joins all users to a specific event"
@@ -76,4 +80,4 @@
 (defn find-by-circle
   "Finds the event a circle belongs to"
   [circle-id]
-  (q-find-by-circle-id {:id circle-id} just-first-row))
+  (q/q-find q-event-by-circle-id {:id circle-id}))

@@ -1,6 +1,6 @@
 (ns baoqu.db.users
   (:require
-   [baoqu.db.connection :refer [connection column-id just-first-row]]
+   [baoqu.db.common :refer [connection column-id just-first-row]]
    [yesql.core :refer [defqueries require-sql]]))
 
 (defqueries "baoqu/db/users.sql"

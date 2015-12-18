@@ -1,6 +1,6 @@
 (ns baoqu.db.circles
   (:require
-   [baoqu.db.connection :refer [connection column-id just-first-row]]
+   [baoqu.db.common :refer [connection column-id just-first-row]]
    [baoqu.db.users :as us]
    [yesql.core :refer [defqueries require-sql]]))
 
