@@ -2,7 +2,7 @@
   (:require
    [baoqu.db.common :as q]
    [baoqu.db.users :as us]
-   [yesql.core :refer [defqueries require-sql]]))
+   [yesql.core :refer [defqueries]]))
 
 (defqueries "baoqu/db/circles.sql"
   {:connection q/connection})
@@ -82,12 +82,13 @@
 (defn add-circle-to-event
   "Creates a new event in a given event"
   [event_id circle]
-  (let [name (:name circle)
-        level (:level circle)]
+  (let [name  (:name circle)
+        level (:level circle)
+        data  {:name name
+               :level level
+               :event event_id}]
     (->
-     (q/q-do-id q-create-circle<! {:name name
-                                   :level level
-                                   :event event_id})
+     (q/q-do-id q-create-circle<! data)
      (find-by-id))))
 
 (defn find-participant-by-id
@@ -98,15 +99,19 @@
 (defn add-participant-to-circle
   "Adds a user to a given circle"
   [circle_id user_id]
-  (->
-   (q-add-participant-to-circle<! {:user user_id :circle circle_id})
-   (find-participant-by-id)))
+  (let [data {:user user_id
+              :circle circle_id}]
+    (->
+     (q/q-do-id q-add-participant-to-circle<! data)
+     (find-participant-by-id))))
 
 (defn find-available-circle
   "Finds an available circle for a given event. That means
    there are fewer people than the factor"
   [event_id]
-  (q/q-find q-find-available-circle {:event event_id :factor 3}))
+  (let [data {:event event_id
+              :factor 3}]
+    (q/q-find q-find-available-circle data)))
 
 (defn find-idea-by-id
   "Finds an idea by id"
@@ -116,9 +121,11 @@
 (defn add-idea-to-circle
   "Adds an idea to a given circle"
   [participant_id idea]
-  (->
-   (q/q-do-id q-add-idea-to-circle<! {:participant participant_id :title idea})
-   (find-idea-by-id)))
+  (let [data {:participant participant_id
+              :title idea}]
+    (->
+     (q/q-do-id q-add-idea-to-circle<! data)
+     (find-idea-by-id))))
 
 (defn find-all-participants
   "Lists all participants"
