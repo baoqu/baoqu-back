@@ -2,7 +2,9 @@
   (:require [baoqu.db.events :as events]
             [baoqu.utils.functions :as fn]
             [baoqu.db.users :as users]
-            [baoqu.db.circles :as circles]))
+            [baoqu.db.circles :as circles]
+            [clojure.test.check.generators :as gen]
+            ))
 
 (defn create-drop
   "Creates database schema"
@@ -27,12 +29,20 @@
   (fn/try-execute circles/create-ideas-participants-table))
 
 (defn load-users
-  "Create a list of users"
+  "Create a list of 50 users"
   []
-  (users/create {:username "john.doe.1@corporation.com"})
-  (users/create {:username "john.doe.2@corporation.com"})
-  (users/create {:username "john.doe.3@corporation.com"})
-  (users/create {:username "john.doe.4@corporation.com"}))
+  (let [names   (gen/elements ["holmes" "brooks" "finlay" "faye" "halley" "lovejoy"])
+        domain  (gen/return "@corporation.com")
+        key-gen (gen/return :username)
+        val-gen (gen/let [x names
+                          y gen/int
+                          z domain]
+                  (str x y z))
+        map-gen (gen/not-empty (gen/map key-gen val-gen))
+        user-list (gen/sample map-gen 50)]
+    (doseq [user user-list]
+      (users/create user))))
+
 
 (defn load-default-event
   "Generate a list of events"

@@ -9,7 +9,8 @@
                  [org.xerial/sqlite-jdbc "3.7.2"]
                  [com.cognitect/transit-clj "0.8.285"
                   :exclusions [com.fasterxml.jackson.core/jackson-core]]
-                 [bouncer "0.3.3"]]
+                 [bouncer "0.3.3"]
+                 [org.clojure/test.check "0.9.0"]]
   ;; end::dependencies[]
   :plugins [[lein-asciidoctor "0.1.14"]]
   :asciidoctor {:sources "doc/*.adoc"
